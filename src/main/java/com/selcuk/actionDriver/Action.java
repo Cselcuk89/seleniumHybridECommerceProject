@@ -91,7 +91,7 @@ public class Action extends BaseClass implements ActionInterface {
     @Override
     public boolean isSelected(WebDriver ldriver, WebElement ele) {
         boolean flag = false;
-        flag = findElement(driver, ele);
+        flag = findElement(getDriver(), ele);
         if (flag) {
             flag = ele.isSelected();
             if (flag) {
@@ -108,7 +108,7 @@ public class Action extends BaseClass implements ActionInterface {
     @Override
     public boolean isEnabled(WebDriver ldriver, WebElement ele) {
         boolean flag = false;
-        flag = findElement(driver, ele);
+        flag = findElement(getDriver(), ele);
         if (flag) {
             flag = ele.isEnabled();
             if (flag) {

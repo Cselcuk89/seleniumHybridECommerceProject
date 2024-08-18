@@ -1,0 +1,48 @@
+package com.selcuk.pageobjects;
+
+import com.selcuk.actionDriver.Action;
+import com.selcuk.base.BaseClass;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class IndexPage extends BaseClass {
+    Action action= new Action();
+
+    @FindBy(xpath = "//a[@class='login']")
+    private WebElement signInBtn;
+
+    @FindBy(xpath = "//img[@class='logo img-responsive']")
+    private WebElement myStoreLogo;
+
+    @FindBy(id="search_query_top")
+    private WebElement searchProductBox;
+
+    @FindBy(name="submit_search")
+    private WebElement searchButton;
+
+    public IndexPage() {
+        PageFactory.initElements(getDriver(), this);
+    }
+    public LoginPage clickOnSignImBtn(){
+        action.fluentWait(getDriver(),signInBtn,10);
+        action.click(getDriver(),signInBtn);
+        return new LoginPage();
+    }
+    public boolean validateLogo(){
+        return action.isElementDisplayed(getDriver(),myStoreLogo);
+    }
+    public String getStoreTitle(){
+        return action.getTitle(getDriver());
+    }
+    public SearchResultPage searchProduct(String productName) throws InterruptedException {
+        action.type(searchProductBox,productName);
+        action.scrollByVisibilityOfElement(getDriver(),searchButton);
+        action.click(getDriver(),searchButton);
+        Thread.sleep(3000);
+        return new SearchResultPage();
+
+    }
+
+
+}
